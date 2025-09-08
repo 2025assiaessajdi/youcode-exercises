@@ -1,0 +1,60 @@
+
+
+
+#include <stdio.h>
+#include <string.h>
+
+// Définition de la structure
+typedef struct {
+    char nom[50];
+    int age;
+} Personne;
+
+// Fonction pour effectuer le tri par sélection
+void triParSelection(Personne tableau[], int taille) {
+    for (int i = 0; i < taille - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < taille; j++) {
+            if (tableau[j].age < tableau[minIndex].age) {
+                minIndex = j;
+            }
+        }
+        // Échange des éléments
+        if (minIndex != i) {
+            Personne temp = tableau[i];
+            tableau[i] = tableau[minIndex];
+            tableau[minIndex] = temp;
+        }
+    }
+}
+
+// Fonction pour afficher le tableau
+void afficherTableau(Personne tableau[], int taille) {
+    for (int i = 0; i < taille; i++) {
+        printf("Nom: %s, Age: %d\n", tableau[i].nom, tableau[i].age);
+    }
+}
+
+int main() {
+    // Déclaration et initialisation du tableau de structures
+    Personne personnes[] = {
+        {"Alice", 25},
+        {"Bob", 20},
+        {"Charlie", 30},
+        {"Diana", 22}
+    };
+    int taille = sizeof(personnes) / sizeof(personnes[0]);
+
+    printf("Tableau avant tri:\n");
+    afficherTableau(personnes, taille);
+
+    // Tri du tableau
+    triParSelection(personnes, taille);
+
+    printf("\nTableau après tri:\n");
+    afficherTableau(personnes, taille);
+
+    return 0;
+}
+
+
